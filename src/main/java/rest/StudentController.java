@@ -27,6 +27,14 @@ public class StudentController {
         return ResponseEntity.ok(studentService.findAll());
     }
 
+    @GetMapping("/{studentId}")
+    public ResponseEntity<Student> findStudentById(@PathVariable int studentId){
+        Student student = studentService.findById(studentId);
+        if(student == null)
+            throw new ApplicationException("Student not found for id: " + studentId, HttpStatus.NOT_FOUND);
+        return ResponseEntity.ok(student);
+    }
+
     @PostMapping("/")
     public ResponseEntity<Student> saveStudent(@RequestBody Student theStudent){
         studentService.save(theStudent);
@@ -34,11 +42,13 @@ public class StudentController {
     }
 
     @DeleteMapping("/{studentId}")
-    public ResponseEntity<?> deleteStudent(@PathVariable int studentId){
+    public ResponseEntity<?> deleteStudentById(@PathVariable int studentId){
         Student student = studentService.findById(studentId);
         if(student == null)
             throw new ApplicationException("Student not found for id: " + studentId, HttpStatus.NOT_FOUND);
         studentService.deleteById(studentId);
         return ResponseEntity.noContent().build();
     }
+
+
 }
