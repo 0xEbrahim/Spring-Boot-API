@@ -3,7 +3,9 @@ package rest;
 import dao.StudentDao;
 import entity.Student;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import services.StudentService;
@@ -22,7 +24,9 @@ public class StudentController {
 
     // Get all students
     @GetMapping("/")
-    public List<Student> findAllStudent(){
-        return studentService.findAll();
+    public ResponseEntity<List<Student>> findAllStudent(){
+        return ResponseEntity.ok(studentService.findAll());
     }
+
+
 }
