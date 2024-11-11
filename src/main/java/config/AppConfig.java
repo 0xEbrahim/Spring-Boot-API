@@ -10,7 +10,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @Configuration
 @EnableAspectJAutoProxy
 @EnableJpaRepositories
-@ComponentScan(basePackages = {"services","rest","dao","aspects"})
+@ComponentScan(basePackages = {"services","rest","dao","aspects","exception"})
 @EntityScan(basePackages = {"entity"})
 public class AppConfig {
 }

@@ -2,7 +2,9 @@ package rest;
 
 import dao.StudentDao;
 import entity.Student;
+import exception.ApplicationException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import services.StudentService;
@@ -31,4 +33,12 @@ public class StudentController {
         return ResponseEntity.ok(theStudent);
     }
 
+    @DeleteMapping("/{studentId}")
+    public ResponseEntity<?> deleteStudent(@PathVariable int studentId){
+        Student student = studentService.findById(studentId);
+        if(student == null)
+            throw new ApplicationException("Student not found for id: " + studentId, HttpStatus.NOT_FOUND);
+        studentService.deleteById(studentId);
+        return ResponseEntity.noContent().build();
+    }
 }
