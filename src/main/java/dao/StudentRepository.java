@@ -35,8 +35,8 @@ public class StudentRepository implements StudentDao {
     }
 
     @Override
-    public void updateById( Student theStudent) {
-        theStudent.setId(0);
+    public void updateById(Student theStudent) {
+        //theStudent.setId(0);
         entityManager.merge(theStudent);
     }
 
