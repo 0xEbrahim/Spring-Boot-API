@@ -15,7 +15,12 @@ public class ApiExceptionHandler {
 
     @ExceptionHandler(ApplicationException.class)
     public ResponseEntity<ApiExceptionResponse> handleApplicationException(ApplicationException exc){
-        ApiExceptionResponse apiExceptionResponse = new ApiExceptionResponse(exc.getMessage(), HttpStatus.BAD_REQUEST, Date.from(Instant.now(Clock.systemUTC())));
-        return new ResponseEntity<>(apiExceptionResponse, HttpStatus.BAD_REQUEST);
+        String message = exc.getMessage();
+        HttpStatus status = exc.getStatus();
+        ApiExceptionResponse apiExceptionResponse = new ApiExceptionResponse(
+                message,
+                status,
+               new Date());
+        return new ResponseEntity<>(apiExceptionResponse, status);
     }
 }
