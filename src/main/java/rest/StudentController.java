@@ -16,6 +16,7 @@ import java.util.List;
 public class StudentController {
     private final StudentDao studentService;
 
+    // Inject student service
     @Autowired
     public StudentController(StudentService studentService){
         this.studentService = studentService;
@@ -27,6 +28,8 @@ public class StudentController {
         return ResponseEntity.ok(studentService.findAll());
     }
 
+
+    // Find a student by student id
     @GetMapping("/{studentId}")
     public ResponseEntity<Student> findStudentById(@PathVariable int studentId){
         Student student = studentService.findById(studentId);
@@ -35,6 +38,7 @@ public class StudentController {
         return ResponseEntity.ok(student);
     }
 
+    // save a new student record to the database
     @PostMapping("/")
     public ResponseEntity<Student> saveStudent(@RequestBody Student theStudent){
         studentService.save(theStudent);
